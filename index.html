@@ -380,10 +380,11 @@
 
   // 1. password
   const form = $('#pass-form'), pass = $('#pass'), err = $('#pass-err');
-  const norm = s => s.toLowerCase().replace(/[’‘`]/g, "'").replace(/\s+/g, ' ').trim();
+  // "12 0' clock", "12 o'clock", "12oclock"... spaces and apostrophes don't matter
+  const isRight = s => /^12[o0]clock$/.test(s.toLowerCase().replace(/[^a-z0-9]/g, ''));
   form.addEventListener('submit', e => {
     e.preventDefault();
-    if (norm(pass.value) === norm("12 0' clock")) {
+    if (isRight(pass.value)) {
       err.classList.remove('show');
       pass.blur();
       go('s-ok');
