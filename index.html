@@ -82,6 +82,7 @@
     .screen.in > *:nth-child(2) { transition-delay: .08s; }
     .screen.in > *:nth-child(3) { transition-delay: .16s; }
     .screen.in > *:nth-child(4) { transition-delay: .24s; }
+    .screen.in > *:nth-child(5) { transition-delay: .32s; }
 
     /* buttons */
     .btn {
@@ -314,6 +315,7 @@
       <li><button class="choice" data-pick="snacks"><span aria-hidden="true">🍿</span>Snacks</button></li>
     </ul>
     <p class="small">None are wrong.</p>
+    <button class="btn next" data-go="s-end">Next</button>
   </section>
 
   <!-- results -->
@@ -347,6 +349,7 @@
 
   <!-- final -->
   <section class="screen final" id="s-end" aria-labelledby="h-end" hidden>
+    <button class="btn ghost" data-go="s-pick">← Back</button>
     <span class="wave" aria-hidden="true">👋</span>
     <h1 id="h-end" tabindex="-1">Cya Get well soon</h1>
   </section>
@@ -441,7 +444,7 @@
       document.querySelectorAll('[data-pick]').forEach(c => {
         if (c.dataset.pick === 'trampoline' && used.has('trampoline')) c.parentElement.remove();
       });
-      go(used.size >= 5 ? 's-end' : 's-pick');
+      go('s-pick');
     }));
 
   enter(current);
