@@ -432,7 +432,7 @@
   document.querySelectorAll('[data-back]').forEach(b =>
     b.addEventListener('click', () => {
       document.querySelectorAll('[data-pick]').forEach(c => {
-        if (used.has(c.dataset.pick)) c.parentElement.remove();
+        if (c.dataset.pick === 'trampoline' && used.has('trampoline')) c.parentElement.remove();
       });
       go(used.size >= 4 ? 's-end' : 's-pick');
     }));
