@@ -219,7 +219,7 @@
     .choice span { display: block; font-size: 1.7rem; margin-bottom: 4px; }
     .choice:hover { border-color: var(--ink); }
     .choice:active { transform: scale(.96); }
-    .choices li:only-child { grid-column: 1 / -1; }
+    .choices li:last-child:nth-child(odd) { grid-column: 1 / -1; }
 
     .shout {
       font-size: clamp(2.6rem, 14vw, 4rem);
@@ -229,6 +229,7 @@
       animation: wobble 2.4s ease-in-out infinite;
       transform-origin: left center;
     }
+    .shout.long { font-size: clamp(2.1rem, 10.5vw, 3.2rem); }
     @keyframes wobble { 0%, 100% { transform: rotate(-1.5deg); } 50% { transform: rotate(1.5deg); } }
 
     .final { text-align: center; align-items: center; }
@@ -310,6 +311,7 @@
       <li><button class="choice" data-pick="thriller"><span aria-hidden="true">🔪</span>Thriller</button></li>
       <li><button class="choice" data-pick="spiderman"><span aria-hidden="true">🕷️</span>Spider-Man</button></li>
       <li><button class="choice" data-pick="trampoline"><span aria-hidden="true">🤸</span>Trampoline</button></li>
+      <li><button class="choice" data-pick="snacks"><span aria-hidden="true">🍿</span>Snacks</button></li>
     </ul>
     <p class="small">None are wrong.</p>
   </section>
@@ -336,6 +338,11 @@
   <section class="screen" id="r-trampoline" aria-labelledby="h-tr" hidden>
     <button class="btn ghost" data-back>← Back</button>
     <h1 id="h-tr" class="shout" tabindex="-1">FACETIME ME</h1>
+  </section>
+
+  <section class="screen" id="r-snacks" aria-labelledby="h-sn" hidden>
+    <button class="btn ghost" data-back>← Back</button>
+    <h1 id="h-sn" class="shout long" tabindex="-1">CHECK THE SNACKS WE GAVE YOU</h1>
   </section>
 
   <!-- final -->
@@ -434,7 +441,7 @@
       document.querySelectorAll('[data-pick]').forEach(c => {
         if (c.dataset.pick === 'trampoline' && used.has('trampoline')) c.parentElement.remove();
       });
-      go(used.size >= 4 ? 's-end' : 's-pick');
+      go(used.size >= 5 ? 's-end' : 's-pick');
     }));
 
   enter(current);
